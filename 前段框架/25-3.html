@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="opp"></div>
+        <template id="root">
+            <div v-html="text"></div>
+            <a v-bind:href="url">网站</a>
+            <!-- v-bind可以缩写为":"（是单向绑定） -->
+             <input type="text" v-model="content">
+                <div>{{content}}</div>
+             <!-- v-model为双向绑定，网页改变Vue插件改变，Vue插件改变网页也改变 -->
+              <input type="text" v-model="score">
+              <div v-if="score>90">优秀</div>
+              <div v-else-if="score>70">良好</div>
+
+              <div v-show="isShow">{{content}}</div>
+
+              <ul>
+                <li v-for="item in students">
+                    <p>{{item.id}}--{{item.name}}</p>
+                </li>
+                <li v-for="(item,index) in student" :key="item.id">
+                    <p>{{index+1}}--{{item.id}}--{{item.name}}</p>
+                </li>
+              </ul>
+
+              <div v-for="(value,key) in student">
+                <!-- value是对象属性的值，key是对象属性的名称 -->
+                <p>{{key}}--{{value}}--{{index}}</p>
+              </div>
+              <div v-for="item in 10">
+                {{item}}
+              </div>
+        </template>
+    <script>
+        const app=Vue.createApp({
+            template:"#root",
+            data(){
+                return{
+                    text:"hello world &copy",
+                    url:"http://baidu.com",
+                    content:"shuangxiang",
+                    score:"0",
+                    isShow:true,
+                    student:[
+                        {id:3,name:'li'},
+                        {id:5,name:'xiang'}
+                    ]
+                }
+            }
+        })
+        app.mount('#opp')
+    </script>
+</body>
+</html>
